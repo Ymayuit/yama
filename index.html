@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>yamaがJavaScriptで作ったjanken</title>
+</head>
+<body>
+  <h1>【萌ちゃん課題】<br>じゃんけんゲーム</h1>
+
+  <div class="computer">
+    <h3>相手</h3>
+  </div>
+  <div class="result">
+    <h3>勝負じゃ</h3>
+  </div>
+
+  <form>
+    <select id="janken">
+      <option>ぐー</option>
+      <option>ちょき</option>
+      <option>ぱー</option>
+    </select>
+    <input type="button" value="いざ！" onclick="startGame()">
+  </form>
+
+  <script type="text/javascript">
+    function startGame(){
+      let play = document.getElementById('janken').selectedIndex;
+      let cNum = Math.floor(Math.random() * 3);
+      let hands;
+      let result;
+      
+      //コンピュータの出し方
+      if (cNum == 0){
+        hands = "ぐー";
+      } else if(cNum == 1){
+        hands = "ちょき";
+      } else if(cNum == 2){
+        hands = "ぱー"
+      }
+
+      if(play == 0 && cNum == 1){
+        result = "勝ち";
+      } else if (play == 1 && cNum == 2){
+        result = "勝ち";
+      } else if (play == 2 && cNum == 0){
+        result = "勝ち";
+      } else if (play == cNum){
+        result = "あいこ";
+      } else {
+        result = "負け";
+      }
+
+      document.getElementById("computer").innerHTML =
+      "<h3>相手" + hands + "</h3>";
+      document.getElementById("result").innerHTML =
+      "<h3>勝敗" + result + "</h3>";
+    }
+  </script>
+</body>
+</html>
