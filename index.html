@@ -7,13 +7,13 @@
   <title>yamaがJavaScriptで作ったjanken</title>
 </head>
 <body>
-  <h1>【萌ちゃん課題】<br>じゃんけんゲーム</h1>
+  <h1>【友だちからの課題だよ！】<br>じゃんけんゲーム</h1>
 
-  <div class="computer">
-    <h3>相手</h3>
+  <div id="computer">
+    <h3>コンピュータが出す手は何かな</h3>
   </div>
-  <div class="result">
-    <h3>勝負じゃ</h3>
+  <div id="result">
+    <h3>勝敗はいかに</h3>
   </div>
 
   <form>
@@ -26,37 +26,51 @@
   </form>
 
   <script type="text/javascript">
+  //関数をfunctionで定義
     function startGame(){
-      let play = document.getElementById('janken').selectedIndex;
+      //プレイヤーが出す手は3つあるのでletでIDはhtmlの'janken'を呼び出す
+      let player = document.getElementById('janken').selectedIndex;
+      //コンピュータは乱数を使って3つから選ぶ
+      //Math.floorで小数点を切り捨て、Math.randomで3未満の整数0,1,2をランダムで表示
       let cNum = Math.floor(Math.random() * 3);
       let hands;
       let result;
       
       //コンピュータの出し方
+      //もしコンピュータが出した手が0（グー）ならば
       if (cNum == 0){
         hands = "ぐー";
+        //1（チョキ）だった場合
       } else if(cNum == 1){
         hands = "ちょき";
+        //2（パー）だった場合
       } else if(cNum == 2){
         hands = "ぱー"
       }
 
-      if(play == 0 && cNum == 1){
+      //プレイヤーとじゃんけんした場合
+      //プレイヤーが0（グー）かつコンピュータが1（ちょき）ならばプレイヤーが勝ち
+      if(player == 0 && cNum == 1){
         result = "勝ち";
-      } else if (play == 1 && cNum == 2){
+        //プレイヤーが1（ちょき）かつコンピュータが2（パー）ならばプレイヤーが勝ち
+      } else if (player == 1 && cNum == 2){
         result = "勝ち";
-      } else if (play == 2 && cNum == 0){
+        //プレイヤーが2（ぱー）かつコンピュータが0（グー）ならばプレイヤーが勝ち
+      } else if (player == 2 && cNum == 0){
         result = "勝ち";
-      } else if (play == cNum){
+        //プレイヤーとコンピュータがあいこ
+      } else if (player == cNum){
         result = "あいこ";
+        //上記以外はプレイヤーの負け
       } else {
         result = "負け";
       }
 
+
       document.getElementById("computer").innerHTML =
-      "<h3>相手" + hands + "</h3>";
+      "<h3>相手：" + hands + "</h3>";
       document.getElementById("result").innerHTML =
-      "<h3>勝敗" + result + "</h3>";
+      "<h3>勝敗：" + result + "</h3>";
     }
   </script>
 </body>
